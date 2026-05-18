@@ -18,4 +18,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: printing github context object
-        run: echo "object ${{github}}"
+        run: echo "object ${{toJSON(github)}}"
