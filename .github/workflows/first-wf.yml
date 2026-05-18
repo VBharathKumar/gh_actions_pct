@@ -2,12 +2,12 @@ name: first-workflow
 on: workflow_dispatch
 jobs:
   first-job:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: first-steps
         uses: actions/checkout@v3
       - name: second-steps
-        uses: actions/set-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: installing npm
