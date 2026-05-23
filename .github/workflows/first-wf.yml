@@ -37,6 +37,11 @@ jobs:
         run: npm install
       - name: build-artifact
         run: npm run build
+      - name: uploading-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: dist/
 
   third-job:
     needs: second-job
