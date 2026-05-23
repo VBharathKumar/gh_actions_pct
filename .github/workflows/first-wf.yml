@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     paths: # used filters
-      - '.github/workflows/'
+      - '.github/workflows/*'
 jobs:
   first-job:
     runs-on: ubuntu-latest
