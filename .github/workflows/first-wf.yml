@@ -42,6 +42,12 @@ jobs:
         with:
           name: artifact
           path: dist/
+      - name: download-artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact
+      - name: listing contents
+        run: ls -lah
 
   third-job:
     needs: second-job
