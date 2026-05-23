@@ -50,4 +50,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: printing-event of github object
-        run: echo "${{to_JSON(github.event)}}"
+        run: echo "${{toJSON(github.event)}}"
