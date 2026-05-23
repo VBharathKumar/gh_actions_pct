@@ -44,3 +44,10 @@ jobs:
     steps:
       - name: printing github context object
         run: echo "object ${{toJSON(github)}}"
+  
+  fourth-job:
+    needs: third-object
+    runs-on: ubuntu-latest
+    steps:
+      - name: printing-event of github object
+        run: echo "{{to_JSON(github.event)}}"
