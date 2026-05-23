@@ -51,3 +51,4 @@ jobs:
     steps:
       - name: printing-event of github object
         run: echo "${{toJSON(github.event)}}"
+# added to test commit that does not trigger workflow though it should [skip ci]
