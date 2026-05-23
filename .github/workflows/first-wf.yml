@@ -27,6 +27,8 @@ jobs:
     needs: first-job
     runs-on: ubuntu-latest
     steps:
+      - name: doing-codecheckout
+        uses: actions/checkout@v3
       - name: installing-node
         uses: actions/setup-node@v3
         with:
