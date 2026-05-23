@@ -46,7 +46,7 @@ jobs:
         run: echo "object ${{toJSON(github)}}"
   
   fourth-job:
-    needs: third-object
+    needs: third-job
     runs-on: ubuntu-latest
     steps:
       - name: printing-event of github object
