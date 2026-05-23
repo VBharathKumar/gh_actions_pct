@@ -1,12 +1,20 @@
 name: first-workflow
-on: workflow_dispatch
+on:
+  pull_request:
+    types: # used types
+      - opened
+      - closed
+  workflow_dispatch:
+  push:
+    paths: # used filters
+      - '.github/workflows/'
 jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
-      - name: first-steps
+      - name: code-checkout
         uses: actions/checkout@v3
-      - name: second-steps
+      - name: installing-node
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -14,8 +22,22 @@ jobs:
         run: npm ci
       - name: run tests
         run: npm test
+
   second-job:
     needs: first-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: installing-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: installing-npm
+        run: npm ci
+      - name: build-artifact
+        run: npm run build
+
+  third-job:
+    needs: second-job
     runs-on: ubuntu-latest
     steps:
       - name: printing github context object
