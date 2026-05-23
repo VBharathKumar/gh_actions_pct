@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: installing npm
-        run: npm ci
+      - name: installing packages
+        run: npm install
       - name: run tests
         run: npm test
 
