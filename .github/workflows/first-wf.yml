@@ -18,12 +18,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: caching the dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: dependencies-key-${{hashFiles(**/package.lock.json)}}
       - name: installing packages
         run: npm install
       - name: run tests
         run: npm test
 
   second-job:
+    outputs:
+      ext-name1: ${{steps.out-file.outputs.ext-name}}
     needs: first-job
     runs-on: ubuntu-latest
     steps:
@@ -33,10 +40,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: installing-npm
+      - name: caching dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: dependencies-key-${{hashFiles(**/package.lock.json)}}
+      - name: installing-dependencies
         run: npm install
       - name: build-artifact
         run: npm run build
+      - name: publishing name of built files
+        id: out-file
+        run: find **/*.js -type f -execdir echo 'ext-name={}' >> $GITHUB_OUTPUT ';'
       - name: uploading-artifact
         uses: actions/upload-artifact@v4
         with:
@@ -56,6 +71,8 @@ jobs:
     steps:
       - name: printing github context object
         run: echo "object ${{toJSON(github)}}"
+      - name: printing out-put of second-job
+        run: echo ${{needs.second-job.outputs.ext-name1}}
   
   fourth-job:
     needs: third-job
