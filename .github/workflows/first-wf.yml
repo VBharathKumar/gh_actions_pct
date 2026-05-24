@@ -51,7 +51,7 @@ jobs:
         run: npm run build
       - name: publishing name of built files
         id: out-file
-        run: find **/*.js -type f -execdir echo 'ext-name={}' >> $GITHUB_OUTPUT ';'
+        run: find dist/assets/*.js -type f -execdir echo 'ext-name={}' >> $GITHUB_OUTPUT ';'
       - name: uploading-artifact
         uses: actions/upload-artifact@v4
         with:
